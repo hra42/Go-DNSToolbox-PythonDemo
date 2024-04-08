@@ -1,7 +1,8 @@
-import streamlit as st
+import app as st
 
+#MARK: - Home
 def intro():
-    import streamlit as st
+    import app as st
 
     st.write("# Welcome to the Demo of DNS-Toolbox")
 
@@ -17,8 +18,9 @@ def intro():
     """
 )
 
+#MARK: - DNS Functions - A Record
 def a_record():
-    import streamlit as st
+    import app as st
 
     st.write("# A Record")
     st.markdown(
@@ -28,8 +30,9 @@ def a_record():
     """
 )
 
+#MARK: - DNS Functions - AAAA Record
 def aaaa_record():
-    import streamlit as st
+    import app as st
 
     st.write("# AAAA Record")
     st.markdown(
@@ -39,8 +42,9 @@ def aaaa_record():
     """
 )
 
+#MARK: - DNS Functions - CNAME Record
 def cname_record():
-    import streamlit as st
+    import app as st
 
     st.write("# CNAME Record")
     st.markdown(
@@ -50,8 +54,9 @@ def cname_record():
     """
 )
 
+#MARK: - DNS Functions - MX Record
 def mx_record():
-    import streamlit as st
+    import app as st
 
     st.write("# MX Record")
     st.markdown(
@@ -61,8 +66,9 @@ def mx_record():
     """
 )
 
+#MARK: - DNS Functions - NS Record
 def ns_record():
-    import streamlit as st
+    import app as st
 
     st.write("# NS Record")
     st.markdown(
@@ -72,8 +78,9 @@ def ns_record():
     """
 )
 
+#MARK: - DNS Functions - TXT Record
 def txt_record():
-    import streamlit as st
+    import app as st
 
     st.write("# TXT Record")
     st.markdown(
@@ -83,8 +90,9 @@ def txt_record():
     """
 )
 
+#MARK: - SSL Function
 def ssl_check():
-    import streamlit as st
+    import app as st
 
     st.write("# SSL Check")
     st.markdown(
@@ -94,6 +102,19 @@ def ssl_check():
     """
 )
 
+#MARK: - M365 Function
+def m365_check():
+    import app as st
+    
+    st.write("# M365 Check")
+    st.markdown(
+    """
+    An M365 check is a test that checks the validity of the M365 configuration of a domain.
+    With this demo you can check the M365 configuration of a domain.
+    """
+)
+
+#MARK: - Pages List
 page_names_to_funcs = {
     "-": intro,
     "A Record": a_record,
@@ -103,7 +124,10 @@ page_names_to_funcs = {
     "NS Record": ns_record,
     "TXT Record": txt_record,
     "SSL Check": ssl_check,
-}   
+    "M365 Check": m365_check
+}
 
+
+#MARK: - Sidebar
 go_dnstoolbox = st.sidebar.selectbox("Choose a function", list(page_names_to_funcs.keys()))
 page_names_to_funcs[go_dnstoolbox]()
