@@ -428,6 +428,7 @@ def m365_check():
 #MARK: - Pages List
 page_names_to_funcs = {
     "-": intro,
+    "M365 Check": m365_check,
     "A Record": a_record,
     "AAAA Record": aaaa_record,
     "CNAME Record": cname_record,
@@ -435,7 +436,6 @@ page_names_to_funcs = {
     "NS Record": ns_record,
     "TXT Record": txt_record,
     "SSL Check": ssl_check,
-    "M365 Check": m365_check
 }
 
 
