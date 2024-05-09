@@ -2,7 +2,7 @@ import streamlit as st
 from internal.dns.dns import get_dns_record, DNS_SERVERS
 
 #MARK: - DNS Functions - CNAME Record
-def cname_record():
+def get_cname_record():
     st.write("# CNAME Record")
     st.markdown(
     """

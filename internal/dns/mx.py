@@ -2,7 +2,7 @@ import streamlit as st
 from internal.dns.dns import get_dns_record, DNS_SERVERS
 
 #MARK: - DNS Functions - MX Record
-def mx_record():
+def get_mx_record():
     st.write("# MX Record")
     st.markdown(
     """

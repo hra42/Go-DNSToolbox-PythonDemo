@@ -5,7 +5,7 @@ from datetime import datetime
 import certifi
 
 #MARK: - SSL Function
-def ssl_check():    
+def invoke_ssl_check():    
     st.write("# SSL Check")
     st.markdown(
     """
@@ -17,11 +17,15 @@ def ssl_check():
     if st.button("Check", key="ssl_check_check"):
         with st.spinner("Checking..."):
             try:
-                context = ssl.create_default_context()
-                context.load_verify_locations(certifi.where())
-                with socket.create_connection((domain, 443)) as sock:
-                    with context.wrap_socket(sock, server_hostname=domain) as ssock:
-                        cert = ssock.getpeercert()
+                try:
+                    context = ssl.create_default_context()
+                    context.minimum_version = ssl.TLSVersion.TLSv1_2
+                    context.options |= ssl.OP_NO_TLSv1
+                    context.options |= ssl.OP_NO_TLSv1_1
+                    context.load_verify_locations(certifi.where())
+                    with socket.create_connection((domain, 443)) as sock:
+                        with context.wrap_socket(sock, server_hostname=domain) as ssock:
+                            cert = ssock.getpeercert()
                     if cert is not None:
                         if 'notAfter' in cert:
                             not_after = cert['notAfter']
@@ -35,26 +39,33 @@ def ssl_check():
                                 st.info(f"Valid to: {not_after}")
                         st.divider()
                         with st.expander("Certificate Details", expanded=False):
-                            if 'subject' in cert and cert['subject'] is not None:
+                            if 'ubject' in cert and cert['subject'] is not None:
                                 for k, v in cert['subject'][0]:
                                     st.write(f"Subject: {v}")
                             if 'issuer' in cert and cert['issuer'] is not None:
                                 for k, v in cert['issuer'][0]:
                                     st.write(f"Issuer: {v}")
-                            if 'version' in cert:
+                            if 'ersion' in cert:
                                 st.write(f"Version: {cert['version']}")
-                            if 'serialNumber' in cert:
+                            if 'erialNumber' in cert:
                                 st.write("Serial Number: ", cert['serialNumber'])
                             if 'notBefore' in cert:
                                 st.write("Valid From: ", cert['notBefore'])
                             if 'notAfter' in cert:
                                 st.write("Valid To: ", cert['notAfter'])
-                            if 'subjectAltName' in cert and cert['subjectAltName'] is not None:
+                            if 'ubjectAltName' in cert and cert['subjectAltName'] is not None:
                                 for item in cert['subjectAltName']:
                                     st.write(f"Subject Alt Name: {item[1]}")
                             if 'OCSP' in cert:
                                 st.write(f"OCSP: ", cert['OCSP'])
                             if 'caIssuers' in cert:
                                 st.write(f"CA Issuers: ", cert['caIssuers'])
-            except Exception as e:
+                except ssl.SSLError as e:
+                    if "unknown protocol" in str(e) or "unsupported protocol" in str(e):
+                        st.error("Error: The server does not support TLS 1.2 or TLS 1.3.")
+                    else:
+                        st.error(f"Error: {str(e)}")
+                except Exception as e:
                     st.error(f"Error: {str(e)}")
+            except Exception as e:
+                st.error(f"Error: {str(e)}")

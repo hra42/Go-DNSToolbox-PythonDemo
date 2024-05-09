@@ -2,7 +2,7 @@ import streamlit as st
 from internal.dns.dns import get_dns_record, DNS_SERVERS
 
 #MARK: - M365 Function
-def m365_check():
+def invoke_m365_check():
     st.write("# M365 Check")
     st.markdown(
     """

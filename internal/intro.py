@@ -1,7 +1,7 @@
 import streamlit as st
 
 #MARK: - Home
-def intro():
+def get_intro():
     st.write("# Welcome to the Demo of DNS-Toolbox")
 
     st.warning("This is a demo version of DNS-Toolbox. This is subject to change. The real application is not yet ready for prime time and will be delivered instead of this one in a few months time.")
