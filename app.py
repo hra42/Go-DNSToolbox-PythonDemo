@@ -1,27 +1,27 @@
 import streamlit as st
-from internal.intro import intro
+from internal.intro import get_intro
 from internal.dns.a import get_a_record
 from internal.dns.aaaa import get_aaaa_record
-from internal.dns.cname import cname_record
-from internal.dns.mx import mx_record
-from internal.dns.ns import ns_record
-from internal.dns.txt import txt_record
-from internal.ssl.check import ssl_check
-from internal.m365.check import m365_check
+from internal.dns.cname import get_cname_record
+from internal.dns.mx import get_mx_record
+from internal.dns.ns import get_ns_record
+from internal.dns.txt import get_txt_record
+from internal.ssl.check import invoke_ssl_check
+from internal.m365.check import invoke_m365_check
 
 st.set_page_config(page_title="DNS-Toolbox", page_icon="🤖", layout="wide")
 
 #MARK: - Pages List
 page_names_to_funcs = {
-    "-": intro,
-    "M365 Check": m365_check,
+    "-": get_intro,
+    "M365 Check": invoke_m365_check,
     "A Record": get_a_record,
     "AAAA Record": get_aaaa_record,
-    "CNAME Record": cname_record,
-    "MX Record": mx_record,
-    "NS Record": ns_record,
-    "TXT Record": txt_record,
-    "SSL Check": ssl_check,
+    "CNAME Record": get_cname_record,
+    "MX Record": get_mx_record,
+    "NS Record": get_ns_record,
+    "TXT Record": get_txt_record,
+    "SSL Check": invoke_ssl_check,
 }
 
 

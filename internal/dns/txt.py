@@ -2,7 +2,7 @@ import streamlit as st
 from internal.dns.dns import get_dns_record, DNS_SERVERS
 
 #MARK: - DNS Functions - TXT Record
-def txt_record():
+def get_txt_record():
     st.write("# TXT Record")
     st.markdown(
     """

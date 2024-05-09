@@ -14,11 +14,11 @@ def get_dns_record(domain, dns_server, type):
     try:
         answers = resolver.resolve(domain, type)
         return [str(rdata) for rset in answers.response.answer for rdata in rset]
-    except resolver.NoAnswer:
+    except dns.resolver.NoAnswer:
         return ["Error: No answer from the DNS server for the requested domain and record type."]
-    except resolver.NXDOMAIN:
+    except dns.resolver.NXDOMAIN:
         return ["Error: The requested domain does not exist."]
-    except resolver.NoNameservers:
+    except dns.resolver.NoNameservers:
         return ["Error: No nameservers are available to fulfill the request."]
-    except resolver.Timeout:
+    except dns.resolver.Timeout:
         return ["Error: The DNS request timed out."]
