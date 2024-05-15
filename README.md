@@ -22,6 +22,12 @@ How to run the streamlit app:
 streamlit run app.py
 ```
 
+or you can use the docker image:
+
+```sh
+docker run -p 8501:8501 -d --name dns-toolbox-demo ghcr.io/hra42/go-dnstoolbox-pythondemo:latest
+```
+
 Later I will add a Dockerfile to run the app in a container.
 
 ## Built With
